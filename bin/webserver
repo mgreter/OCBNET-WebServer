@@ -1,0 +1,132 @@
+#!/usr/bin/perl
+################################################################################
+# Copyright 2013/2014 by Marcel Greter
+# This file is part of OCBNET-WebSprite (GPL3)
+################################################################################
+our $VERSION = "0.0.1";
+################################################################################
+
+use strict;
+use warnings;
+
+# load modules
+use Pod::Usage;
+use Getopt::Long;
+use File::Slurp;
+use File::chdir;
+use File::Basename;
+
+# load the main websprite module
+use OCBNET::WebServer qw();
+
+################################################################################
+
+# load 3rd party module
+use JSON qw(from_json);
+use File::Which qw(which);
+use File::Slurp qw(read_file);
+
+################################################################################
+
+# define a sub to print out the version and exit
+sub version { print "Plack webserver $VERSION for webmerge [Perl]"; exit 0; };
+
+################################################################################
+
+# init options
+my $path;
+my $host;
+my @modules;
+my @includes;
+my $socket;
+my $listen;
+my $access_log;
+my $port = 1080;
+my $debug = 0;
+my $config_file;
+
+# get options
+GetOptions (
+	'help' => sub { pod2usage(1); },
+	'config|c=s' => \ $config_file,
+	'version|v' => \ &version,
+	'debug|d:i' => \ $debug,
+	'port|p=i' => \ $port,
+	'path=s' => \ $path,
+	'host|h=s' => \ $host,
+	'socket|s=s' => \ $socket,
+	'listen|l=s' => \ $listen,
+	'access-log=s' => \ $access_log,
+	'module|M=s' => sub { push @modules, $_[1]; },
+	'include|I=s' => sub { push @includes, $_[1]; },
+);
+
+################################################################################
+
+# give some messages for basic config file errors
+die "no config-file defined" unless (defined $config_file);
+die "config-file not found" unless (-e $config_file);
+die "config-file not a file" unless (!-d $config_file);
+die "config-file not readbable" unless (-r $config_file);
+
+# load the json configuration from the disk
+my $config_json = read_file( $config_file, binmode => ':utf8' );
+die "error reading config-file: $!" unless defined $config_file;
+
+# decode the configuration from json
+my $config = from_json $config_json;
+die "error decoding json" unless $config;
+
+# overload config with command line options
+$config->{'port'} = $port if defined $port;
+$config->{'path'} = $path if defined $path;
+$config->{'host'} = $host if defined $host;
+$config->{'socket'} = $socket if defined $socket;
+$config->{'listen'} = $listen if defined $listen;
+$config->{'access-log'} = $access_log if defined $access_log;
+# make sure we have some array to push options to
+$config->{'modules'} = [] unless defined $config->{'modules'};
+$config->{'includes'} = [] unless defined $config->{'includes'};
+# prepend the command line options
+unshift @{$config->{'modules'}}, @modules;
+unshift @{$config->{'includes'}}, @includes;
+
+################################################################################
+# create and run the plack webserver
+################################################################################
+
+OCBNET::WebServer->new($config)->run;
+
+#################################################################################
+#################################################################################
+
+__END__
+
+=head1 NAME
+
+webserver - Plack webserver implementation for webmerge
+
+=head1 SYNOPSIS
+
+webserver [options] [filepath]
+
+ Options:
+   -v, --version      print version
+   -h, --help         print this help
+   -x, --compress=[0-9]     compress spritesets
+
+=head1 OPTIONS
+
+=over 8
+
+=item B<-help>
+
+Print a brief help message with options and exits.
+
+=back
+
+=head1 DESCRIPTION
+
+B<This program> is a plack webserver implementation for webmerge.
+
+=cut

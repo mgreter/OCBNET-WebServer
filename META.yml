@@ -1,0 +1,55 @@
+---
+abstract: 'Plack Webserver Implementation for Webmerge'
+author:
+  - 'Marcel Greter <marcel.greter@ocbnet.ch>'
+build_requires:
+  File::Which: '0'
+  Test::More: '0'
+configure_requires:
+  Module::Build: '0'
+  Software::License: '0'
+dynamic_config: 1
+generated_by: 'Module::Build version 0.421, CPAN::Meta::Converter version 2.142060'
+license: gpl
+meta-spec:
+  url: http://module-build.sourceforge.net/META-spec-v1.4.html
+  version: '1.4'
+name: OCBNET-WebServer
+provides:
+  OCBNET::Plack::App::Directory:
+    file: lib/OCBNET/Plack/App/Directory.pm
+    version: v0.0.1
+  OCBNET::Plack::App::Echo:
+    file: lib/OCBNET/Plack/App/Echo.pm
+    version: v0.0.1
+  OCBNET::Plack::App::File:
+    file: lib/OCBNET/Plack/App/File.pm
+    version: v0.0.1
+  OCBNET::Plack::App::Proxy:
+    file: lib/OCBNET/Plack/App/Proxy.pm
+    version: v0.0.1
+  OCBNET::Plack::Apps:
+    file: lib/OCBNET/Plack/Apps.pm
+    version: v0.0.1
+  OCBNET::Plack::Filter:
+    file: lib/OCBNET/Plack/Filter.pm
+    version: v0.0.1
+  OCBNET::Plack::Filter::SHTML:
+    file: lib/OCBNET/Plack/Filter/SHTML.pm
+    version: v0.0.1
+  OCBNET::Plack::Options:
+    file: lib/OCBNET/Plack/Options.pm
+    version: v0.0.1
+  OCBNET::WebServer:
+    file: lib/OCBNET/WebServer.pm
+    version: v0.0.1
+requires:
+  CGI::SHTML: '0'
+  Data::Dumper: '0'
+  File::Slurp: '0'
+  List::MoreUtils: '0'
+  perl: '5.010'
+resources:
+  license: http://www.gnu.org/licenses/gpl-3.0.txt
+  repository: https://github.com/mgreter/OCBNET-WebServer.git
+version: v0.0.1

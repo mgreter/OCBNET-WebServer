@@ -1,0 +1,89 @@
+{
+   "abstract" : "Plack Webserver Implementation for Webmerge",
+   "author" : [
+      "Marcel Greter <marcel.greter@ocbnet.ch>"
+   ],
+   "dynamic_config" : 1,
+   "generated_by" : "Module::Build version 0.421",
+   "license" : [
+      "gpl_3"
+   ],
+   "meta-spec" : {
+      "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
+      "version" : "2"
+   },
+   "name" : "OCBNET-WebServer",
+   "prereqs" : {
+      "build" : {
+         "requires" : {
+            "File::Which" : "0",
+            "Test::More" : "0"
+         }
+      },
+      "configure" : {
+         "requires" : {
+            "Module::Build" : "0",
+            "Software::License" : "0"
+         }
+      },
+      "runtime" : {
+         "requires" : {
+            "CGI::SHTML" : "0",
+            "Data::Dumper" : "0",
+            "File::Slurp" : "0",
+            "List::MoreUtils" : "0",
+            "perl" : "5.010"
+         }
+      }
+   },
+   "provides" : {
+      "OCBNET::Plack::App::Directory" : {
+         "file" : "lib/OCBNET/Plack/App/Directory.pm",
+         "version" : "v0.0.1"
+      },
+      "OCBNET::Plack::App::Echo" : {
+         "file" : "lib/OCBNET/Plack/App/Echo.pm",
+         "version" : "v0.0.1"
+      },
+      "OCBNET::Plack::App::File" : {
+         "file" : "lib/OCBNET/Plack/App/File.pm",
+         "version" : "v0.0.1"
+      },
+      "OCBNET::Plack::App::Proxy" : {
+         "file" : "lib/OCBNET/Plack/App/Proxy.pm",
+         "version" : "v0.0.1"
+      },
+      "OCBNET::Plack::Apps" : {
+         "file" : "lib/OCBNET/Plack/Apps.pm",
+         "version" : "v0.0.1"
+      },
+      "OCBNET::Plack::Filter" : {
+         "file" : "lib/OCBNET/Plack/Filter.pm",
+         "version" : "v0.0.1"
+      },
+      "OCBNET::Plack::Filter::SHTML" : {
+         "file" : "lib/OCBNET/Plack/Filter/SHTML.pm",
+         "version" : "v0.0.1"
+      },
+      "OCBNET::Plack::Options" : {
+         "file" : "lib/OCBNET/Plack/Options.pm",
+         "version" : "v0.0.1"
+      },
+      "OCBNET::WebServer" : {
+         "file" : "lib/OCBNET/WebServer.pm",
+         "version" : "v0.0.1"
+      }
+   },
+   "release_status" : "stable",
+   "resources" : {
+      "license" : [
+         "http://www.gnu.org/licenses/gpl-3.0.txt"
+      ],
+      "repository" : {
+         "type" : "git",
+         "url" : "https://github.com/mgreter/OCBNET-WebServer.git",
+         "web" : "https://github.com/mgreter/OCBNET-WebServer"
+      }
+   },
+   "version" : "v0.0.1"
+}

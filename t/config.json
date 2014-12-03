@@ -1,0 +1,14 @@
+{
+	"port": 8000,
+	"host": "127.0.0.1",
+	"listen": "127.0.0.1:8080",
+	"access-log": "access.log",
+	"mounts" : [
+		{ "mount" : "/", "type" : "directory", "path" : "." },
+		{ "mount" : "/echo", "type" : "echo" },
+		{ "mount" : "/test", "type" : "directory", "path" : ["bin","lib","t"] },
+		{ "mount" : "/google", "type" : "proxy", "remote" : "https://www.google.com/?ncr" },
+		{ "mount" : "/test/github", "type" : "proxy", "remote" : "https://github.com" },
+		{ "mount" : "/test/wikipedia", "type" : "proxy", "remote" : "http://www.wikipedia.org" }
+	]
+}
